@@ -3,13 +3,15 @@
    <el-form  status-icon :model="user"  ref="ruleForm" class="login-form">
      <h1>用户登录</h1>
   <el-form-item  prop="userName" :rules="[
-    { required: true, message: '请输入用户名', trigger: 'blur' }
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+     { min: 2, max: 6, message: '长度在 2 到 6个字符', trigger: 'blur' }
     ]">
     <el-input type="text"  autocomplete="off" placeholder="请输入用户名"
     prefix-icon="el-icon-user-solid"  v-model="user.userName" clearable></el-input>
   </el-form-item>
   <el-form-item prop="userPassword"  :rules="[
-    { required: true, message: '请输入密码', trigger: 'blur' }
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, max: 8, message: '长度在 6 到 8 个字符', trigger: 'blur' }
     ]">
     <el-input type="password"  autocomplete="off" placeholder="请输入密码"
     prefix-icon="el-icon-lock"  v-model="user.userPassword" show-password clearable></el-input>
@@ -27,11 +29,12 @@ export default {
   data(){
     return{
      user:{
-        userName:'',
+      userName:'',
       userPassword:''
      }
     }
-  },methods: {
+  },
+  methods: {
     submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -39,13 +42,23 @@ export default {
           message: '提交成功',
           type: 'success'
         })
+
+        this.$http.post('/api/login',{
+        userName:this.user.userName,
+        userPassword:this.user.userPassword
+      }).then(res => {
+      console.log(res)
+    })
+
+        this.$router.push({ path: 'home' })
+
           } else {
             this.$message.error('提交失败')
             return false;
           }
-        });
-      },
-  },
+        })
+      }
+  }
 }
 </script>
 
@@ -55,7 +68,7 @@ export default {
   width: 100%;
   height: 100vh;
   background:url(../assets/background.jpg) no-repeat;
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
   .login-form{
    position: absolute;
