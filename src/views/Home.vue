@@ -39,7 +39,8 @@
           <span>后台管理系统</span>
       </div>
       <div class="el-header-right">
-        <img src="../assets/background.jpg">
+        <!-- <img src="../assets/background.jpg"> -->
+        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         <i class="el-icon-caret-bottom"></i>
       </div>
     </el-header>
@@ -97,7 +98,6 @@ export default {
   .el-main {
     background-color: #E9EEF3;
     color: #333;
-    text-align: center;
   }
   .home-container{
     height: 100vh;

@@ -1,13 +1,10 @@
 const Mock = require('mockjs')
 
 Mock.mock('/api/login', 'POST', function(req) {
+    let { username, password } = JSON.parse(req.body)
     return {
-        status: 200,
-        message: '登录成功',
-        data: {
-            username: JSON.parse(req.body).username,
-            password: JSON.parse(req.body).password
-        }
+        username,
+        password,
+        status: 200
     }
-    console.log(req.body)
 })
