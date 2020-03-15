@@ -31,10 +31,10 @@ const routes = [{
                 meta: { title: 'Welcome' }
             },
             {
-                path: '/2',
+                path: '/2-1',
                 name: 'List',
                 component: List,
-                meta: { title: 'List' }
+                meta: { title: 'List' },
             },
             {
                 path: '/3',
